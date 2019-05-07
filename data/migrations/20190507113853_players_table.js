@@ -4,9 +4,12 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("players", players => {
     players.increments("id").primary();
-    players.string("firstName").required();
-    players.string("lastName").required();
-    players.integer("teamId").references("teams.id");
+    players.string("firstName").notNullable();
+    players.string("lastName").notNullable();
+    players
+      .integer("teamId")
+      .references("teams.id")
+      .defaultTo(null);
   });
 };
 
