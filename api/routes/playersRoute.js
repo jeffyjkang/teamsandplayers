@@ -42,6 +42,18 @@ router.get("/", async (req, res) => {
       .json({ error: "There was an error retrieving the players." });
   }
 });
+// get all players matching last name
+router.get("/match/:lName", async (req, res) => {
+  const lName = req.params.lName;
+  try {
+    const players = await playersDb.get().where("lastName", lName);
+    res.status(200).json(players);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "There was an error retrieving the players." });
+  }
+});
 // get by id
 router.get("/:id", async (req, res) => {
   const id = req.params.id;

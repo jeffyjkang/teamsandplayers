@@ -135,6 +135,12 @@ describe("server.js", () => {
       const response = await request(server).get("/players");
       expect(response.status).toEqual(expected);
     });
+    // get all players matching the last name
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/players/match/lnTest");
+      expect(response.status).toEqual(expected);
+    });
     // get single player
     test("should return 404", async () => {
       const expected = 404;
