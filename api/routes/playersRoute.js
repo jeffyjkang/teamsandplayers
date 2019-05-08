@@ -9,6 +9,7 @@ const playersDb = require("../helpers/playersDb");
 // query all players on a team
 // add or remove a player from a team
 
+// post route
 router.post("/", async (req, res) => {
   const { firstName, lastName } = req.body;
   if (!firstName) {
@@ -26,6 +27,37 @@ router.post("/", async (req, res) => {
     res.status(201).json(player);
   } catch (error) {
     res.status(500).json({ error: "There was an error creating a player." });
+  }
+});
+
+// get route
+// get all
+router.get("/", async (req, res) => {
+  try {
+    const players = await playersDb.get();
+    res.status(200).json(players);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "There was an error retrieving the players." });
+  }
+});
+// get by id
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const player = await playersDb.get(id).first();
+    if (!player) {
+      res
+        .status(404)
+        .json({ error: "The player with the specified id does not exist." });
+    } else {
+      res.status(200).json(player);
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "There was an error retrieving the player." });
   }
 });
 

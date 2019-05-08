@@ -13,6 +13,7 @@ exports.up = function(knex, Promise) {
       .string("location")
       .unique()
       .notNullable();
+    teams.integer("count").unsigned();
   });
 };
 
