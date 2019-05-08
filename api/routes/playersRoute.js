@@ -30,4 +30,35 @@ router.post("/", async (req, res) => {
   }
 });
 
+// get route
+// get all
+router.get("/", async (req, res) => {
+  try {
+    const players = await playersDb.get();
+    res.status(200).json(players);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "There was an error retrieving the players." });
+  }
+});
+// get by id
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const player = await playersDb.get(id).first();
+    if (!player) {
+      res
+        .status(404)
+        .json({ error: "The player with the specified id does not exist." });
+    } else {
+      res.status(200).json(player);
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "There was an error retrieving the player." });
+  }
+});
+
 module.exports = router;

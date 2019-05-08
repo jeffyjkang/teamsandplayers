@@ -15,6 +15,7 @@ describe("server.js", () => {
     });
   });
   // teams endpoints
+  //
   describe("teams endpoint (/teams)", () => {
     // post endpoint for teams
     // first entry
@@ -49,8 +50,22 @@ describe("server.js", () => {
         .send({ name: "testname", location: "testlocation" });
       expect(response.status).toEqual(expected);
     });
+    // get endpoint for teams
+    // get all teams
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/teams");
+      expect(response.status).toEqual(expected);
+    });
+    // get single team
+    test("should return 404", async () => {
+      const expected = 404;
+      const response = await request(server).get("/teams/100");
+      expect(response.status).toEqual(expected);
+    });
   });
   // players endpoints
+  //
   describe("players endpont (/players)", () => {
     // post endpoint for players
     // first entry
@@ -75,6 +90,19 @@ describe("server.js", () => {
       const response = await request(server)
         .post("/players")
         .send({ firstName: "fnTest0", lastName: "" });
+      expect(response.status).toEqual(expected);
+    });
+    // get endpoint for players
+    // get all players
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/players");
+      expect(response.status).toEqual(expected);
+    });
+    // get single player
+    test("should return 404", async () => {
+      const expected = 404;
+      const response = await request(server).get("/players/100");
       expect(response.status).toEqual(expected);
     });
   });
