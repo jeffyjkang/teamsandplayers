@@ -7,6 +7,7 @@ const teamsDb = require("../helpers/teamsDb");
 // query for teams by id, query all teams,
 // query all teams ordered by name or location
 
+// post route
 router.post("/", async (req, res) => {
   const { name, location } = req.body;
   if (!name) {

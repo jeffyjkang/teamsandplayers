@@ -9,6 +9,7 @@ const playersDb = require("../helpers/playersDb");
 // query all players on a team
 // add or remove a player from a team
 
+// post route
 router.post("/", async (req, res) => {
   const { firstName, lastName } = req.body;
   if (!firstName) {
