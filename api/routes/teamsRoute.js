@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const teamsDb = require("../helpers/teamsDb");
+//
+const playersDb = require("../helpers/playersDb");
 
 // create endpoints that allow:
 // create a team,
@@ -52,6 +54,26 @@ router.get("/:id", async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: "There was an error retrieving the team." });
+  }
+});
+// get all players in a team by team id
+router.get("/players/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const team = await teamsDb.get(id).first();
+    if (!team) {
+      res
+        .status(404)
+        .json({ error: "The team with the specified id does not exist." });
+    } else {
+      const players = await playersDb.get().where("teamId", id);
+      team.players = players;
+      res.status(200).json(team);
+    }
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "There was an error retrieving the team and players." });
   }
 });
 

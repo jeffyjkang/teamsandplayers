@@ -60,7 +60,19 @@ describe("server.js", () => {
     // get single team
     test("should return 404", async () => {
       const expected = 404;
-      const response = await request(server).get("/teams/100");
+      const response = await request(server).get("/teams/1000");
+      expect(response.status).toEqual(expected);
+    });
+    // get all players in a team with existing team
+    test("should return 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/teams/players/1");
+      expect(response.status).toEqual(expected);
+    });
+    // get all players in a team with no existing team
+    test("should return 404", async () => {
+      const expected = 404;
+      const response = await request(server).get("/teams/players/1000");
       expect(response.status).toEqual(expected);
     });
   });
@@ -102,7 +114,7 @@ describe("server.js", () => {
     // get single player
     test("should return 404", async () => {
       const expected = 404;
-      const response = await request(server).get("/players/100");
+      const response = await request(server).get("/players/1000");
       expect(response.status).toEqual(expected);
     });
   });
