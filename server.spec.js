@@ -57,6 +57,30 @@ describe("server.js", () => {
       const response = await request(server).get("/teams");
       expect(response.status).toEqual(expected);
     });
+    // get all teams by name ascending
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/teams/name_asc");
+      expect(response.status).toEqual(expected);
+    });
+    // get all teams by name descending
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/teams/name_desc");
+      expect(response.status).toEqual(expected);
+    });
+    // get all teams by location ascending
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/teams/loc_asc");
+      expect(response.status).toEqual(expected);
+    });
+    // get all teams by location descending
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).get("/teams/loc_desc");
+      expect(response.status).toEqual(expected);
+    });
     // get single team
     test("should return 404", async () => {
       const expected = 404;

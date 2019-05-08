@@ -40,6 +40,42 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "There was an error retrieving the teams." });
   }
 });
+// get all teams ordered by name ascending
+router.get("/name_asc", async (req, res) => {
+  try {
+    const teams = await teamsDb.get().orderBy("name", "asc");
+    res.status(200).json(teams);
+  } catch (error) {
+    res.status(500).json({ error: "There was an error retrieving the teams." });
+  }
+});
+// get all teams ordered by name descending
+router.get("/name_desc", async (req, res) => {
+  try {
+    const teams = await teamsDb.get().orderBy("name", "desc");
+    res.status(200).json(teams);
+  } catch (error) {
+    res.status(500).json({ error: "There was an error retrieving the teams." });
+  }
+});
+// get all teams ordered by location ascending
+router.get("/loc_asc", async (req, res) => {
+  try {
+    const teams = await teamsDb.get().orderBy("location", "asc");
+    res.status(200).json(teams);
+  } catch (error) {
+    res.status(500).json({ error: "There was an error retrieving the teams." });
+  }
+});
+// get all teams ordered by location descending
+router.get("/loc_desc", async (req, res) => {
+  try {
+    const teams = await teamsDb.get().orderBy("location", "desc");
+    res.status(200).json(teams);
+  } catch (error) {
+    res.status(500).json({ error: "There was an error retrieving the teams." });
+  }
+});
 // get by id
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
