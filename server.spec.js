@@ -112,6 +112,14 @@ describe("server.js", () => {
         .send({ firstName: "fnTest", lastName: "lnTest" });
       expect(response.status).toEqual(expected);
     });
+    // second entry, to test add / remove from team
+    test("should return status 201", async () => {
+      const expected = 201;
+      const response = await request(server)
+        .post("/players")
+        .send({ firstName: "fnTesting", lastName: "lnTesting" });
+      expect(response.status).toEqual(expected);
+    });
     // missing first name
     test("should return status 400", async () => {
       const expected = 400;
@@ -142,9 +150,59 @@ describe("server.js", () => {
       expect(response.status).toEqual(expected);
     });
     // get single player
-    test("should return 404", async () => {
+    test("should return status 404", async () => {
       const expected = 404;
       const response = await request(server).get("/players/1000");
+      expect(response.status).toEqual(expected);
+    });
+    // add player to team with no team id / invalid id provided
+    test("should return status 400", async () => {
+      const expected = 400;
+      const response = await request(server)
+        .put("/players/add/41")
+        .send({ teamId: "" });
+      expect(response.status).toEqual(expected);
+    });
+    // add player successfully
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server)
+        .put("/players/add/41")
+        .send({ teamId: 3 });
+      expect(response.status).toEqual(expected);
+    });
+    // player id does not exist
+    test("should return status 404", async () => {
+      const expected = 404;
+      const response = await request(server)
+        .put("/players/add/1000")
+        .send({ teamId: 3 });
+      expect(response.status).toEqual(expected);
+    });
+    // limit reached for team, reject adding of player
+    test("should return status 400", async () => {
+      const expected = 400;
+      const response = await request(server)
+        .put("/players/add/42")
+        .send({ teamId: 3 });
+      expect(response.status).toEqual(expected);
+    });
+    // try to remove player that does not exist from a team
+    test("should return status 404", async () => {
+      const expected = 404;
+      const response = await request(server).put("/players/remove/1000");
+      expect(response.status).toEqual(expected);
+    });
+    // remove player successfully from a team
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).put("/players/remove/41");
+      expect(response.status).toEqual(expected);
+    });
+    // try to remove a player that does not have a team
+    test("should return status 200", async () => {
+      const expected = 200;
+      const response = await request(server).put("/players/remove/41");
       expect(response.status).toEqual(expected);
     });
   });
