@@ -124,7 +124,6 @@ router.put("/add/:id", async (req, res) => {
 //remove player from a team
 router.put("/remove/:id", async (req, res) => {
   const id = req.params.id;
-  // const { firstName, lastName, teamId } = req.body;
   try {
     const player = await playersDb.get(id).first();
     if (!player) {
