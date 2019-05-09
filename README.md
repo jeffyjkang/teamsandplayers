@@ -25,18 +25,18 @@
 
 **Create endpoints that allow us to:**
 
-[x] Create a Team
-[x] Create a Player
-[x] Add or Remove a Player from a Team
-[x] Query for Players
-[x] Query by ID
-[x] Query All Players
-[x] Query All Players matching a given Last Name
-[x] Query for all Players on a Team
-[x] Query for Teams
-[x] Query by ID
-[x] Query All Teams
-[x] Query All Teams ordered by Name or Location
+- [x] Create a Team
+- [x] Create a Player
+- [x] Add or Remove a Player from a Team
+- [x] Query for Players
+- [x] Query by ID
+- [x] Query All Players
+- [x] Query All Players matching a given Last Name
+- [x] Query for all Players on a Team
+- [x] Query for Teams
+- [x] Query by ID
+- [x] Query All Teams
+- [x] Query All Teams ordered by Name or Location
 
 _For example, we should be able to:_
 _Send a POST request containing a Player object to http://localhost:5000/Players and create a new Player_
