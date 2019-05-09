@@ -4,7 +4,7 @@
 
 ### Assessment:
 
--Set up a web API project to interact with a database containing Teams and Players.
+- Set up a web API project to interact with a database containing Teams and Players.
 
 ### Guidelines:
 
